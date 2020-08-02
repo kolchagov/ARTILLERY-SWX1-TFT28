@@ -2,9 +2,9 @@
 #include "STM32_Flash.h"
 
 #define TSC_SIGN  0x20200512 // DO NOT MODIFY
-#define PARA_SIGN 0x20200513 // (YYYMMDD) If a new setting parameter is added, modify here and initialize the initial value in the "infoSettingsReset()" function
+#define PARA_SIGN 0x20200724 // (YYYMMDD) If a new setting parameter is added, modify here and initialize the initial value in the "infoSettingsReset()" function
 
-extern u32 TSC_Para[7];        //
+extern int32_t TSC_Para[7];        //
 extern SETTINGS infoSettings;  //
 
 enum{
@@ -118,7 +118,9 @@ void readStoredPara(void)
 
 //machine specific settings
 
-  infoSettings.tool_count           = byteToWord(data + (index += 4), 4);
+  infoSettings.hotend_count         = byteToWord(data + (index += 4), 4);
+  infoSettings.bed_en               = byteToWord(data + (index += 4), 4);
+  infoSettings.chamber_en           = byteToWord(data + (index += 4), 4);
   infoSettings.ext_count            = byteToWord(data + (index += 4), 4);
   infoSettings.fan_count            = byteToWord(data + (index += 4), 4);
   infoSettings.auto_load_leveling   = byteToWord(data + (index += 4), 4);
@@ -192,7 +194,7 @@ void storePara(void)
     wordToByte(TSC_Para[i],                           data + (index += 4));
   }
   wordToByte(infoSettings.rotate_ui,                  data + (index += 4));
-  
+
   wordToByte(PARA_SIGN,                               data + (index += 4));
   wordToByte(infoSettings.baudrate,                   data + (index += 4));
   wordToByte(infoSettings.language,                   data + (index += 4));
@@ -244,7 +246,9 @@ void storePara(void)
 
   //machine specific settings
 
-  wordToByte(infoSettings.tool_count,                 data + (index += 4));
+  wordToByte(infoSettings.hotend_count,               data + (index += 4));
+  wordToByte(infoSettings.bed_en,                     data + (index += 4));
+  wordToByte(infoSettings.chamber_en,                 data + (index += 4));
   wordToByte(infoSettings.ext_count,                  data + (index += 4));
   wordToByte(infoSettings.fan_count,                  data + (index += 4));
   wordToByte(infoSettings.auto_load_leveling,         data + (index += 4));
@@ -314,5 +318,5 @@ bool readIsTSCExist(void)
 
 bool readIsRestored(void)
 {
-  return ((paraStatus & PARA_WAS_RESTORED) != 0);  
+  return ((paraStatus & PARA_WAS_RESTORED) != 0);
 }

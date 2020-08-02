@@ -67,9 +67,9 @@ void loaditemsCustomGcode()
 void menuCustom(void)
 {
   //load custom codes
-  customcodes = (CUSTOM_GCODES*)malloc(sizeof(CUSTOM_GCODES));
-  gc_cur_page = 0;
-  W25Qxx_ReadBuffer((u8*)customcodes,CUSTOM_GCODE_ADDR,sizeof(CUSTOM_GCODES));
+  CUSTOM_GCODES tempcodes;
+  customcodes = &tempcodes;
+  W25Qxx_ReadBuffer((u8*)&tempcodes,CUSTOM_GCODE_ADDR,sizeof(CUSTOM_GCODES));
   gcode_num = customcodes->count;
 
   gc_page_count = (gcode_num+LISTITEM_PER_PAGE-1)/LISTITEM_PER_PAGE;
@@ -116,6 +116,7 @@ void menuCustom(void)
       }
       break;
     case KEY_ICON_7:
+      gc_cur_page = 0;
       infoMenu.cur--;
       break;
     default:
@@ -123,7 +124,6 @@ void menuCustom(void)
     }
     loopProcess();
   }
-  free(customcodes);
 }
 
 
@@ -192,17 +192,17 @@ void menuMachineSettings(void)
   // title
   LABEL_MACHINE_SETTINGS,
   // icon                       label
-  {{ICON_CUSTOM,               LABEL_CUSTOM},
-    {ICON_RGB_SETTINGS,         LABEL_RGB_SETTINGS},
+   {{ICON_RGB_SETTINGS,         LABEL_RGB_SETTINGS},
+    {ICON_PARAMETER,            LABEL_PARAMETER_SETTING},
+    {ICON_CUSTOM,               LABEL_CUSTOM},
     {ICON_GCODE,                LABEL_TERMINAL},
     {ICON_SHUT_DOWN,            LABEL_SHUT_DOWN},
-    {ICON_PARAMETER,            LABEL_PARAMETER_SETTING},
     {ICON_BACKGROUND,           LABEL_BACKGROUND},
     {ICON_BACKGROUND,           LABEL_BACKGROUND},
     {ICON_BACK,                 LABEL_BACK},}
   };
-  KEY_VALUES key_num = KEY_IDLE;
 
+  KEY_VALUES key_num = KEY_IDLE;
   menuDrawPage(&machineSettingsItems);
 
   while(infoMenu.menu[infoMenu.cur] == menuMachineSettings)
@@ -210,34 +210,13 @@ void menuMachineSettings(void)
     key_num = menuKeyGetValue();
     switch(key_num)
     {
-
-      case KEY_ICON_0:
-        infoMenu.menu[++infoMenu.cur] =  menuCustom;
-        break;
-
-      case KEY_ICON_1:
-        infoMenu.menu[++infoMenu.cur] = menuRGBSettings;
-        break;
-
-      case KEY_ICON_2:
-        infoMenu.menu[++infoMenu.cur] = menuSendGcode;
-        break;
-
-      case KEY_ICON_3:
-        storeCmd("M81\n");
-        break;
-
-      case KEY_ICON_4:
-        mustStoreCmd("M503 S0\n");
-        infoMenu.menu[++infoMenu.cur] = menuParameterSettings;
-        break;
-
-      case KEY_ICON_7:
-        infoMenu.cur--;
-        break;
-
-      default:
-        break;
+      case KEY_ICON_0: infoMenu.menu[++infoMenu.cur] = menuRGBSettings; break;
+      case KEY_ICON_1: infoMenu.menu[++infoMenu.cur] = menuParameterSettings; break;
+      case KEY_ICON_2: infoMenu.menu[++infoMenu.cur] = menuCustom; break;
+      case KEY_ICON_3: infoMenu.menu[++infoMenu.cur] = menuSendGcode; break;
+      case KEY_ICON_4: storeCmd("M81\n"); break;
+      case KEY_ICON_7: infoMenu.cur--; break;
+      default: break;
     }
 
     loopProcess();

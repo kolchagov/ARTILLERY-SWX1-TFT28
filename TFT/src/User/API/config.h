@@ -36,7 +36,9 @@
 #define CONFIG_MARLIN_TITLE         "marlin_title:"
 #define CONFIG_MARLIN_FULLSCREEN    "marlin_fullscreen:"
 //-----------------------------Printer / Machine Settings
-#define CONFIG_TOOL_COUNT           "hotend_count:"
+#define CONFIG_HOTEND_COUNT         "hotend_count:"
+#define CONFIG_BED_EN               "bed_en:"
+#define CONFIG_CHAMBER_EN           "chamber_en:"
 #define CONFIG_EXT_COUNT            "ext_count:"
 #define CONFIG_FAN_COUNT            "fan_count:"
 #define CONFIG_MAX_TEMP             "max_temp:"
@@ -63,9 +65,11 @@
 #define CONFIG_PREHEAT_NAME_1       "preheat_name1:"
 #define CONFIG_PREHEAT_NAME_2       "preheat_name2:"
 #define CONFIG_PREHEAT_NAME_3       "preheat_name3:"
+#define CONFIG_PREHEAT_NAME_4       "preheat_name4:"
 #define CONFIG_PREHEAT_TEMP_1       "preheat_temp1:"
 #define CONFIG_PREHEAT_TEMP_2       "preheat_temp2:"
 #define CONFIG_PREHEAT_TEMP_3       "preheat_temp3:"
+#define CONFIG_PREHEAT_TEMP_4       "preheat_temp4:"
 //-----------------------------Power Supply Settings (if connected to TFT Controller)
 #define CONFIG_PS_ON                "ps_on:"
 #define CONFIG_PS_LOGIC             "ps_on_active_high:"
@@ -118,8 +122,8 @@
 #define CONFIG_CUSTOM_GCODE_15  "custom_gcode_15:"
 //-----------------------------Start, End & Cancel G-codes
 #define CONFIG_START_GCODE_ON   "start_gcode_enabled:"
-#define CONFIG_END_GOCODE_ON    "end_gcode_enabled:"
-#define CONFIG_CANCEL_GOCODE_ON "cancel_gcode_enabled:"
+#define CONFIG_END_GCODE_ON    "end_gcode_enabled:"
+#define CONFIG_CANCEL_GCODE_ON "cancel_gcode_enabled:"
 #define CONFIG_START_GCODE      "start_gcode:"
 #define CONFIG_END_GCODE        "end_gcode:"
 #define CONFIG_CANCEL_GCODE     "cancel_gcode:"
@@ -129,6 +133,7 @@
 #define MAX_EXT_SPEED_LIMIT       5000         // Extruder speed over this will not pe parsed.
 #define MAX_TOOL_TEMP             300          // extruder temp over this will not pe parsed.
 #define MAX_BED_TEMP              200          // bed temp over this will not pe parsed.
+#define MAX_CHAMBER_TEMP          100          // bed temp over this will not pe parsed.
 #define MAX_SPEED_LIMIT           12000        // speed over this will not pe parsed.
 #define MAX_RUNOUT_DISTANCE       50           // runout distance over this will not pe parsed.
 #define MAX_DELAY_MS              1800         // time delay (ms) over this will not pe parsed.
@@ -142,6 +147,7 @@
 #define MIN_POS_LIMIT             0         // position value less than this will not be parsed.
 #define MIN_TOOL_TEMP             20        // extruder temp less than this will not pe parsed.
 #define MIN_BED_TEMP              20        // bed temp less than this will not pe parsed.
+#define MIN_CHAMBER_TEMP          20        // chamber temp less than this will not pe parsed.
 #define MIN_RUNOUT_DISTANCE       1         // runout distance less than this will not be parsed.
 #define MIN_DELAY_MS              10        // time delay (ms) less than this will not pe parsed.
 #define MIN_DELAY_SEC             1         // time delay (sec) less than this will not pe parsed.
