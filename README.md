@@ -29,6 +29,9 @@ Use firmware, icons, and fonts from the [`Copy to SD Card root directory to upda
 
 ## Update TFT Firmware
 
+### For Artillery Sidewinder X1 
+just copy contents of the folder `Copy to SD Card - MKS` into the root of tflash card, plug it in the SD-slot of the printer and restart the printer to perform update. This mod needs `Manual mesh bed leveling` and `Baby steps` to work. I'll upload the hex file to be flashed on MKS Gen-L board.
+
 TFT firmware updates are comprised of two parts:
 
 1. The firmware binary (`BIGTREE_TFT*_V*.*.*.bin`). Example: `BIGTREE_TFT35_V3.0.25.2.bin`:
