@@ -6,28 +6,28 @@
 
 // LCD resolution, font and icon size
 #ifndef TFT_RESOLUTION
-  #define TFT_RESOLUTION
-  #include "./Resolution/TFT_320X240.h"
+#define TFT_RESOLUTION
+#include "./Resolution/TFT_320X240.h"
 #endif
 
 #ifndef ROOT_DIR
-  #define ROOT_DIR "MKS"
+#define ROOT_DIR "MKS"
 #endif
 
 // Hardware version config
 #ifndef HARDWARE_VERSION
-  #define HARDWARE_VERSION "TFT32_V4.0"
+#define HARDWARE_VERSION "MKSTFT28_mod hadeco.eu"
 #endif
 
 // LCD interface
 #ifndef TFTLCD_DRIVER
-  #define TFTLCD_DRIVER HX8558  // Type of LCD driver, now support[RM68042, ILI9488, ILI9341, ST7789, HX8558].
-  #define TFTLCD_0_DEGREE_REG_VALUE   0xA4
-  #define TFTLCD_180_DEGREE_REG_VALUE 0XA4
+#define TFTLCD_DRIVER HX8558  // Type of LCD driver, now support[RM68042, ILI9488, ILI9341, ST7789, HX8558].
+#define TFTLCD_0_DEGREE_REG_VALUE   0xA4
+#define TFTLCD_180_DEGREE_REG_VALUE 0XA4
 #endif
 //#define STM32_HAS_FSMC // FSMC 8080 interface(high speed), or normal IO interface(low speed)
 #ifndef LCD_DATA_16BIT
-  #define LCD_DATA_16BIT 1 // LCD data 16bit or 8bit
+#define LCD_DATA_16BIT 1 // LCD data 16bit or 8bit
 #endif
 
 // Debug disable, free pins for other function
@@ -50,10 +50,10 @@
 #define SERIAL_PORT_3 _USART3
 #define USART3_TX_PIN PD8
 #define USART3_RX_PIN PD9
-//#define SERIAL_PORT_4 _UART4
+ //#define SERIAL_PORT_4 _UART4
 
-//XPT2046 Software SPI Pins (touch screen ic)
-//need CS/SCK/MISO/MOSI for Software SPI, and TPEN for pen interrupt
+ //XPT2046 Software SPI Pins (touch screen ic)
+ //need CS/SCK/MISO/MOSI for Software SPI, and TPEN for pen interrupt
 #define XPT2046_CS    PC9
 #define XPT2046_SCK   PC10
 #define XPT2046_MISO  PC11
@@ -64,10 +64,10 @@
 #define SD_SPI_SUPPORT
 //#define SD_SDIO_SUPPORT
 #ifdef SD_SPI_SUPPORT
-  #define SD_LOW_SPEED  7 // 2^(SPEED+1) = 256 frequency division
-  #define SD_HIGH_SPEED 1 // 2 frequency division
-  #define SD_SPI        _SPI1
-  #define SD_CS_PIN     PD11
+#define SD_LOW_SPEED  7 // 2^(SPEED+1) = 256 frequency division
+#define SD_HIGH_SPEED 1 // 2 frequency division
+#define SD_SPI        _SPI1
+#define SD_CS_PIN     PD11
 #endif
 
 // SD Card CD detect pin
